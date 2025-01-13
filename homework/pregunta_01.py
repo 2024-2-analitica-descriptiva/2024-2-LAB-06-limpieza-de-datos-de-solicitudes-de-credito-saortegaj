@@ -12,13 +12,10 @@ El archivo limpio debe escribirse en "files/output/solicitudes_de_credito.csv"
 
 """
 
-import pandas as pd 
-import os 
-
 def pregunta_01():
-
-
-    # Cargar datos
+    import pandas as pd 
+    import os 
+    
     file_path = 'files/input/solicitudes_de_credito.csv' 
     data = pd.read_csv(file_path, sep=';') 
 
@@ -41,21 +38,12 @@ def pregunta_01():
     data[object_columns] = data[object_columns].apply(lambda x: x.str.lower().replace(['-', '_'], ' ', regex=True).str.strip()) 
     data['barrio'] = data['barrio'].str.lower().replace(['-', '_'], ' ', regex=True) 
 
-    
-
-
     data.drop_duplicates(inplace=True)
 
     output_dir = 'files/output' 
     os.makedirs(output_dir, exist_ok=True) 
-
-    
     output_path = f'{output_dir}/solicitudes_de_credito.csv'
     data.to_csv(output_path, sep=';', index=False) 
-    
-
     return data.head()
-
-
 
 pregunta_01()
